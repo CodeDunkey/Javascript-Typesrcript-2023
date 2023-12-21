@@ -326,3 +326,41 @@ console.log(person1.fullName);
 
 const person2 = new Person("sue", "sueden")
 //#endregion
+
+
+// Getters and Setters with defineProperty() "constructor functions"
+//#region 
+function Person2(firstName, lastName){
+    this._firstName = firstName;
+    this._lastName = lastName;
+
+    Object.defineProperty(this, 'firstName', {
+        get: function () {
+            return this.capitalizeFirstChar(this._firstName);
+        },
+        set: function (value) {
+            this._firstName = value;
+        }
+    });
+    
+    Object.defineProperty(this, 'lastName', {
+        get: function () {
+            return this.capitalizeFirstChar(this._lastName);
+        },
+        set: function (value) {
+            this._lastName = value;
+        }
+    });
+}
+
+// one way of adding a function to the constructor funtion.
+Person2.prototype.capitalizeFirstChar = function (value) {
+    return(
+        value.charAt(0).toUpperCase() + value.slice(1)
+    )
+}
+const person3 = new Person2("bob", "bobson")
+console.log(person3.firstName)
+console.log(person3.lastName)
+
+//#endregion
