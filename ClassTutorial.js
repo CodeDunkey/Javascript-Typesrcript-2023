@@ -96,7 +96,7 @@ const test1 = class SomeThing1 {
     // // method/funtion:
     // myMethod2: function (){}
     myMethod1() {
-        return (<>{123}</>)
+        return (123)
     }
 };
 
@@ -245,7 +245,58 @@ const some2 = new SomeThing2("Bob", 1234)
 console.log(some2.nAme)
 some2.thisInfo()
 console.log("Calling the static method trough the class from which it originate: ", SomeThing2.theClassId());
-console.log("Trying to call a static method trough an instance",some2.theClassId());
+// console.log("Trying to call a static method trough an instance",some2.theClassId());
 //#endregion
 
-//
+//bind() and Defining this.
+//#region 
+class App {
+    constructor(){
+        this.serverName = "localhost"
+
+        document.querySelector("button").addEventListener('click', this.getServerName.bind(this))
+    }
+
+    getServerName(){
+        console.log("The server name is: ", this.serverName)
+    }
+}
+
+const app = new App();
+app.getServerName();
+//#endregion
+
+// Getters and setters with classes
+//#region 
+class Person {
+    constructor(firstName, lastName){
+        this._firstName = firstName;
+        this._lastName = lastName;
+    }
+
+    // the getter is a function that is privat for the class and is run before values are passed/used
+    get firstName (){
+        return(
+            this.capitalizeFirstChar(this._firstName)
+            // without use of method // this._firstName.charAt(0).toUpperCase() + this._firstName.slice(1)
+        )
+    }
+
+    // the setter is running when the chosen value is set to something else, as below.
+    set firstName (valuue){
+        this._firstName = this.capitalizeFirstChar(valuue)
+        // without use of method // this._firstName = valuue.charAt(0).toUpperCase() + valuue.slice(1)
+    }
+
+    // method used in get and set.
+    capitalizeFirstChar(valuue){
+        return valuue.charAt(0).toUpperCase() + valuue.slice(1)
+    }
+}
+const person1 = new Person("john", "johnson")
+console.log(person1.firstName);
+person1.firstName = "joe"; // the setter steps in here
+console.log(person1.firstName);
+
+const person2 = new Person("sue", "sueden")
+//#endregion
