@@ -274,7 +274,7 @@ class Person {
         this._lastName = lastName;
     }
 
-    // the getter is a function that is privat for the class and is run before values are passed/used
+    // the getter is a function that is public for the class and can be called after initialization
     get firstName (){
         return(
             this.capitalizeFirstChar(this._firstName)
@@ -282,9 +282,28 @@ class Person {
         )
     }
 
+    // the getter is a function that is public for the class and can be called after initialization
+    get lastName (){
+        return(
+            this.capitalizeFirstChar(this._lastName)
+            // without use of method // this._firstName.charAt(0).toUpperCase() + this._firstName.slice(1)
+        )
+    }
+
+    // the getter is a function that is public for the class and can be called after initialization
+    get fullName(){
+        return (`${this.firstName} ${this.lastName}`)
+    }
+
     // the setter is running when the chosen value is set to something else, as below.
     set firstName (valuue){
         this._firstName = this.capitalizeFirstChar(valuue)
+        // without use of method // this._firstName = valuue.charAt(0).toUpperCase() + valuue.slice(1)
+    }
+
+    // the setter is running when the chosen value is set to something else, as below.
+    set lastName (valuue){
+        this._lastName = this.capitalizeFirstChar(valuue)
         // without use of method // this._firstName = valuue.charAt(0).toUpperCase() + valuue.slice(1)
     }
 
@@ -294,9 +313,16 @@ class Person {
     }
 }
 const person1 = new Person("john", "johnson")
+console.log(person1);
 console.log(person1.firstName);
+console.log(person1.lastName);
+console.log(person1.fullName);
 person1.firstName = "joe"; // the setter steps in here
+person1.lastName = "smellson"; // the setter steps in here
+console.log(person1);
 console.log(person1.firstName);
+console.log(person1.lastName);
+console.log(person1.fullName);
 
 const person2 = new Person("sue", "sueden")
 //#endregion
