@@ -364,3 +364,36 @@ console.log(person3.firstName)
 console.log(person3.lastName)
 
 //#endregion
+
+//#region
+class API {
+    constructor() {
+      this.isLoading = false;
+    }
+  
+    handleBuyButtonClick() {
+      this.showLoadingIcon();
+  
+      setTimeout(() => {
+        this.hideLoadingIcon();
+        this.updateCart();
+      }, 3000); // Simulate 3-second delay
+    }
+  
+    showLoadingIcon() {
+      this.isLoading = true;
+      console.log('Loading icon shown');
+    }
+  
+    hideLoadingIcon() {
+      this.isLoading = false;
+      console.log('Loading icon hidden');
+    }
+  
+    updateCart() {
+      console.log('Cart updated');
+    }
+  }
+  
+  const api = new API();
+  //#endregion
